@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c2b">
+  <meta name="description" content="A clear dashboard for monitoring EU and UK steel safeguard tariff-rate quotas.">
+  <title>SteelQuota — EU &amp; UK tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="SteelQuota home"><span class="brand-mark">S<span>Q</span></span><span>steelquota<span class="brand-dot">.</span></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">▦</span> Overview</a>
+        <a class="nav-link" href="#quotas"><span class="nav-icon">▤</span> Quota categories</a>
+        <a class="nav-link" href="#sources"><span class="nav-icon">↗</span> Data sources</a>
+      </nav>
+      <div class="side-bottom"><div class="help-card"><span class="help-icon">i</span><strong>About this tracker</strong><p>Quota balances change as customs authorities process allocations.</p><a href="#sources">Understand the data <span>→</span></a></div><div class="sidebar-foot">STEEL TRADE INTELLIGENCE<br><span>EUROPE · 2025/26</span></div></div>
+    </aside>
+    <main id="top" class="main-content">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong>Quota overview</strong></div><div class="top-actions"><span class="demo-tag"><i></i> PREVIEW DATA</span><button class="icon-button" aria-label="Notifications">♧</button><div class="avatar" aria-label="User profile">SQ</div></div></header>
+      <section id="overview" class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> TRADE MEASURES · 2025/26</div><h1>Steel quota <span>monitor</span></h1><p class="subtitle">A single view of safeguard tariff-rate quotas across the EU and United Kingdom.</p></div><button id="refresh-button" class="refresh-button"><span class="refresh-icon">↻</span> Refresh data</button></section>
+      <section class="notice" role="note"><span class="notice-icon">✳</span><div><strong>Preview with illustrative data</strong><p>Live government data is not connected yet. Figures below are examples only—not current quota balances. See <a href="#sources">data sources and status</a>.</p></div><button class="notice-close" aria-label="Dismiss notice">×</button></section>
+      <section class="summary-grid" aria-label="Quota summary">
+        <article class="summary-card"><div class="card-label">TRACKED JURISDICTIONS <span class="card-icon">◎</span></div><div class="summary-number">02<span class="summary-unit"> regions</span></div><div class="card-foot"><span class="flag-pair">🇪🇺 <span>+</span> 🇬🇧</span> EU and United Kingdom</div></article>
+        <article class="summary-card"><div class="card-label">QUOTA CATEGORIES <span class="card-icon">▤</span></div><div class="summary-number" id="category-total">08<span class="summary-unit"> categories</span></div><div class="card-foot"><span class="mini-dot green"></span> Across both jurisdictions</div></article>
+        <article class="summary-card highlight-card"><div class="card-label">LOWEST REMAINING <span class="card-icon">⌁</span></div><div class="summary-number" id="lowest-remaining">—<span class="summary-unit">%</span></div><div class="card-foot"><span class="mini-dot amber"></span><span id="lowest-category">Illustrative preview</span></div></article>
+        <article class="summary-card"><div class="card-label">LAST UPDATED <span class="card-icon">◷</span></div><div class="summary-number date-number" id="last-updated">Preview</div><div class="card-foot"><span class="mini-dot gray"></span> Not a live update</div></article>
+      </section>
+      <section id="quotas" class="quota-section"><div class="section-heading"><div><div class="eyebrow">ALLOCATION STATUS</div><h2>Quota categories</h2></div><div class="table-controls"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search categories" aria-label="Search categories"></label><label class="select-wrap"><span class="sr-only">Filter jurisdiction</span><select id="region-filter"><option value="all">All regions</option><option value="EU">European Union</option><option value="UK">United Kingdom</option></select></label></div></div>
+        <div class="jurisdiction-tabs" role="tablist" aria-label="Jurisdiction filter"><button class="jurisdiction-tab selected" data-region="all" role="tab" aria-selected="true">All quotas <span id="all-count">08</span></button><button class="jurisdiction-tab" data-region="EU" role="tab" aria-selected="false">🇪🇺 European Union</button><button class="jurisdiction-tab" data-region="UK" role="tab" aria-selected="false">🇬🇧 United Kingdom</button></div>
+        <div class="table-wrap"><table><thead><tr><th>PRODUCT CATEGORY</th><th>JURISDICTION</th><th>QUOTA PERIOD</th><th>REMAINING</th><th>UTILISATION</th><th>STATUS</th></tr></thead><tbody id="quota-rows"></tbody></table><div id="empty-state" class="empty-state" hidden>No categories match your search.</div></div>
+        <div class="table-footer"><span id="result-count">Showing 8 categories</span><span>All quantities shown in metric tonnes</span></div>
+      </section>
+      <section id="sources" class="sources-section"><div class="sources-heading"><div><div class="eyebrow">TRANSPARENCY FIRST</div><h2>Official data sources</h2></div><span class="source-status"><i></i> Connections not configured</span></div><p class="sources-intro">Quota balances are published by customs authorities and can change as allocations are processed. This preview does not fetch or verify live balances.</p><div class="source-cards"><a class="source-card" href="https://ec.europa.eu/taxation_customs/dds2/taric/quota_consultation.jsp?Lang=en" target="_blank" rel="noreferrer"><span class="source-flag">🇪🇺</span><span class="source-info"><strong>EU TARIC quota consultation</strong><small>European Commission · Official quota lookup</small></span><span class="external-icon">↗</span></a><a class="source-card" href="https://www.trade-tariff.service.gov.uk/quotas" target="_blank" rel="noreferrer"><span class="source-flag">🇬🇧</span><span class="source-info"><strong>UK Trade Tariff quotas</strong><small>HMRC · Official quota lookup</small></span><span class="external-icon">↗</span></a></div><div class="method-note"><span>ⓘ</span><p><strong>Next step:</strong> Connect official quota feeds and map their product codes, order numbers, origin rules, and quota periods before displaying balances as live. The refresh button currently updates the preview timestamp only.</p></div></section>
+      <footer class="page-footer"><span>© 2025 SteelQuota Monitor</span><span>Built for clearer steel trade decisions <span class="footer-star">✳</span></span><span>Data preview · Not for customs decisions</span></footer>
+    </main>
+  </div>
+</body>
+</html>
